@@ -1,2 +1,3 @@
-# JDK8-Tutorial
-JDK8语法特性的使用
+# JDK-Sample
+JDK使用示例
+JDK8语法特性
