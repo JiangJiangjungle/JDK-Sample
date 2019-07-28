@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  *
  * @author jiangshenjie
  */
-public class StreamFilterTest {
+public class StreamFilterDemo {
 
     /**
      * 获取集合中所有满足特定条件的字符串

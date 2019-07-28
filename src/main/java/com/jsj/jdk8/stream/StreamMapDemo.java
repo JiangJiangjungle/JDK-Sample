@@ -10,7 +10,7 @@ import java.util.function.Function;
  *
  * @author jiangshenjie
  */
-public class StreamMapTest {
+public class StreamMapDemo {
     /**
      * 获取集合中每个字符串的第一个字符
      */

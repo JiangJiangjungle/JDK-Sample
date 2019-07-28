@@ -8,7 +8,7 @@ import java.util.Collection;
  *
  * @author jiangshenjie
  */
-public class StreamSortTest {
+public class StreamSortDemo {
     public static void main(String[] args) {
         Collection<String> stringCollection = Arrays.asList("??", "啦啦啦", "ABC", "E", "ddsad2e", "12345", "123456");
         stringCollection.stream()

@@ -9,7 +9,7 @@ import java.util.function.Consumer;
  *
  * @author jiangshenjie
  */
-public class MethodReferenceTest {
+public class MethodReferenceDemo {
     public static void main(String[] args) {
         //实例方法引用
         Consumer<String> forEach = System.out::println;

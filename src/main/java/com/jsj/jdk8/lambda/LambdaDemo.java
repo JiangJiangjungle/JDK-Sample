@@ -14,7 +14,7 @@ package com.jsj.jdk8.lambda;
  *
  * @author jiangshenjie
  */
-public class LambdaTest {
+public class LambdaDemo {
     public static void main(String[] args) {
         //声明了方法参数类型
         MathOperation add = (int a, int b) -> a + b;
@@ -27,11 +27,11 @@ public class LambdaTest {
         //不加大括号
         MathOperation div = (int a, int b) -> a / b;
 
-        LambdaTest test = new LambdaTest();
-        System.out.println("10 + 5 = " + test.operate(10, 5, add));
-        System.out.println("10 - 5 = " + test.operate(10, 5, sub));
-        System.out.println("10 x 5 = " + test.operate(10, 5, multi));
-        System.out.println("10 / 5 = " + test.operate(10, 5, div));
+        LambdaDemo demo = new LambdaDemo();
+        System.out.println("10 + 5 = " + demo.operate(10, 5, add));
+        System.out.println("10 - 5 = " + demo.operate(10, 5, sub));
+        System.out.println("10 x 5 = " + demo.operate(10, 5, multi));
+        System.out.println("10 / 5 = " + demo.operate(10, 5, div));
     }
 
     private int operate(int a, int b, MathOperation operation) {
