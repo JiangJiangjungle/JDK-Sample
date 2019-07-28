@@ -2,6 +2,7 @@ package com.jsj.jdk8.lambda;
 
 /**
  * Lambda表达式将函数作为参数传入方法中，用于函数式接口。
+ * <p>
  * 语法格式如下：
  * <p>
  * (parameters) -> expression 或 (parameters) ->{ statements; }
