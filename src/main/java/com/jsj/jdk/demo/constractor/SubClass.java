@@ -1,11 +1,12 @@
 package com.jsj.jdk.demo.constractor;
 
 public class SubClass extends SuperClass {
-    Member m1 = new Member("子类的成员变量");
 
     {
         System.out.println("子类的构造代码块");
     }
+
+    Member m1 = new Member("子类的成员变量");
 
     public SubClass() {
         super();
