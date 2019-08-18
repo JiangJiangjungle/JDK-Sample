@@ -1,5 +1,7 @@
 package com.jsj.jdk.demo.buffer;
 
+import sun.nio.ch.DirectBuffer;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -8,10 +10,15 @@ import java.nio.ByteBuffer;
 public class BufferDemo {
     public static void main(String[] args) throws Throwable {
         ByteBuffer buffer = ByteBuffer.allocateDirect(64);
+        int i = 0;
         while (true) {
+            if (++i % 50 == 0) {
+                ((DirectBuffer) buffer).cleaner().clean();
+                buffer = ByteBuffer.allocateDirect(64);
+            }
             buffer.put((byte) 'a');
             System.out.println(buffer);
-            Thread.sleep(5000);
+            Thread.sleep(500);
         }
     }
 }
