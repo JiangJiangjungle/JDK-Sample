@@ -8,6 +8,7 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -58,7 +59,7 @@ public class NioServerDemo {
                         buffer.flip();
 
                         // 将字节转化为为UTF-16的字符串
-                        String receivedString = Charset.forName("UTF-8").newDecoder().decode(buffer).toString();
+                        String receivedString = StandardCharsets.UTF_8.newDecoder().decode(buffer).toString();
 
                         // 控制台打印出来
                         System.out.println("接收到来自" + channel.socket().getRemoteSocketAddress() + "的信息:" + receivedString);
@@ -67,7 +68,7 @@ public class NioServerDemo {
                         String f = format.format(new Date());
                         // 准备发送的文本
                         String sendString = "你好,客户端. @" + f + "，已经收到你的信息:" + receivedString;
-                        buffer = ByteBuffer.wrap(sendString.getBytes("UTF-8"));
+                        buffer = ByteBuffer.wrap(sendString.getBytes(StandardCharsets.UTF_8));
                         channel.write(buffer);
                         // 设置为下一次读取或是写入做准备
                         key.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);

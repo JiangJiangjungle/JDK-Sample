@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 /**
  * 堆外内存使用示例
  */
-public class BufferDemo {
+public class DirectBufferDemo {
     public static void main(String[] args) throws Throwable {
         ByteBuffer buffer = ByteBuffer.allocateDirect(64);
         int i = 0;
