@@ -1,46 +1,70 @@
 package com.jsj.jdk.demo.annotation;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * 注解测试类
+ * 利用自定义注解，简单模仿一个Spring IOC容器的bean创建和注册的过程
+ *
+ * @author jiangshenjie
  */
 public class AnnotationDemo {
+    private static Map<Class<?>, Object> applicationContext = new HashMap<>(8);
 
-    public static void main(String[] args) throws Exception {
-        String packageLocation = AnnotationDemo.class.getResource("/").getPath();
-        //扫描类路径下所有类
-        String className = AnnotationDemo.class.getName();
-        List<Class> classList = getAllClass(packageLocation, className.substring(0, className.lastIndexOf(".")));
-        for (Class clz : classList) {
-            System.out.println(clz.getName() + "-------------------");
-            //获取一个Class（包括接口）所带的所有注解
-            Annotation[] annotations = clz.getAnnotations();
-            for (Annotation a : annotations) {
-                System.out.println(a);
-            }
-        }
+    public AnnotationDemo() {
     }
 
-    public static List<Class> getAllClass(String classLocation, String packageName) throws Exception {
-        File packageDir = new File(classLocation + packageName.replaceAll("[.]", "/"));
-        String[] packageNames = packageDir.list();
-        List<Class> classes = null;
-        Class clz;
-        if (packageNames != null) {
-            for (int i = 0; i < packageNames.length; i++) {
-                packageNames[i] = String.format("%s.%s", packageName, packageNames[i].substring(0, packageNames[i].indexOf(".class")));
-                if ((clz = Class.forName(packageNames[i])) != null) {
-                    if (classes == null) {
-                        classes = new ArrayList<>();
-                    }
-                    classes.add(clz);
-                }
-            }
+    public static void main(String[] args) {
+        String rootPath = AnnotationDemo.class.getResource("").getPath();
+        String packageName = AnnotationDemo.class.getPackage().getName();
+        //扫描并创建bean
+        autoWired(rootPath, packageName);
+        //查询对应类型的bean
+        BasicService service = getBean(BasicService.class);
+        //调用方法
+        service.doService();
+    }
+
+    /**
+     * 获取已注册的bean
+     *
+     * @param clz
+     * @param <T>
+     * @return
+     */
+    private static <T> T getBean(Class<T> clz) {
+        return (T) applicationContext.get(clz);
+    }
+
+    /**
+     * 扫描包，并根据@Service注解创建和注册对应bean
+     */
+    private static void autoWired(String rootPath, String scanPackageName) {
+        File file = new File(rootPath);
+        String[] paths = file.list();
+        if (paths == null) {
+            return;
         }
-        return classes;
+        Arrays.stream(paths)
+                .filter(path -> path.endsWith(".class"))
+                .forEach((path) -> {
+                    String className = String.format("%s.%s", scanPackageName, path.substring(0, path.indexOf(".class")));
+                    try {
+                        Class<?> clz = Class.forName(className);
+                        Service serviceAnnotation = clz.getAnnotation(Service.class);
+                        if (serviceAnnotation != null) {
+                            //生成动态代理类并注册
+                            applicationContext.put(clz.getInterfaces()[0], proxy(clz.newInstance()));
+                        }
+                    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+                        e.printStackTrace();
+                    }
+                });
+    }
+
+    public static <T> T proxy(T object) {
+        return TransactionProxy.bind(object);
     }
 }
