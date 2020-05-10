@@ -9,5 +9,5 @@ public interface BasicService {
     /**
      * 模拟service执行
      */
-    public void doService();
+    void doService();
 }
