@@ -5,6 +5,9 @@ import com.jsj.jdk.impl.threadpool.NamedThreadFactory;
 import java.time.LocalTime;
 import java.util.concurrent.*;
 
+/**
+ * @author jiangshenjie
+ */
 public class CountDownLatchDemo {
 
     static class Task implements Runnable {

@@ -1,4 +1,4 @@
-package com.jsj.jdk.demo.nio;
+package com.jsj.jdk.demo.io.nio;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

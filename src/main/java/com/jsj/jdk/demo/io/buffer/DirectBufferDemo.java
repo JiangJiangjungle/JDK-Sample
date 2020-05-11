@@ -1,4 +1,4 @@
-package com.jsj.jdk.demo.buffer;
+package com.jsj.jdk.demo.io.buffer;
 
 import sun.nio.ch.DirectBuffer;
 

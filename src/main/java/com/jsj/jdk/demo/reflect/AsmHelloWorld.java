@@ -1,4 +1,4 @@
-package com.jsj.jdk.demo.asm;
+package com.jsj.jdk.demo.reflect;
 
 import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.MethodVisitor;

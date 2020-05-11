@@ -1,4 +1,4 @@
-package com.jsj.jdk.demo.serialize;
+package com.jsj.jdk.demo.io.serialize;
 
 import com.alibaba.fastjson.JSON;
 import io.protostuff.LinkedBuffer;
