@@ -5,6 +5,7 @@ import java.util.concurrent.RecursiveTask;
 
 /**
  * ForkJoin任务的测试示例
+ * @author jiangshenjie
  */
 public class ForkJoinDemo {
     /**
